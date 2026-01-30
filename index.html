@@ -172,7 +172,6 @@
       const [showNoticeModal, setShowNoticeModal] = useState(false);
       const [notices, setNotices] = useState(loadFromStorage('roworks_notices', []));
       const [newNotice, setNewNotice] = useState({ title: '', content: '' });
-      const [showAllNotices, setShowAllNotices] = useState(false);
       const [comments, setComments] = useState(loadFromStorage('roworks_comments', {}));
       const [newComment, setNewComment] = useState('');
       const [newRating, setNewRating] = useState(5);
@@ -791,48 +790,9 @@
           {notices.length > 0 && (
             <div className="max-w-7xl mx-auto px-6 -mt-6 relative z-10 smooth-appear">
               <div className="bg-white border rounded-xl p-5 hover-lift">
-                <div className="flex justify-between items-start mb-1">
-                  <h3 className="font-bold text-gray-900">{notices[0].title}</h3>
-                  {isStaff && (
-                    <button onClick={() => {
-                      if (confirm('이 공지사항을 삭제하시겠습니까?')) {
-                        setNotices(notices.filter(n => n.id !== notices[0].id));
-                        alert('공지사항이 삭제되었습니다!');
-                      }
-                    }} className="text-red-600 hover:text-red-700 text-sm font-medium px-3 py-1 hover:bg-red-50 rounded">
-                      삭제
-                    </button>
-                  )}
-                </div>
+                <h3 className="font-bold text-gray-900 mb-1">{notices[0].title}</h3>
                 <p className="text-sm text-gray-700">{notices[0].content}</p>
-                {notices.length > 1 && (
-                  <button onClick={() => setShowAllNotices(!showAllNotices)} className="text-xs text-blue-600 hover:text-blue-700 mt-2">
-                    {showAllNotices ? '접기' : `+ ${notices.length - 1}개 더보기`}
-                  </button>
-                )}
               </div>
-              {showAllNotices && notices.length > 1 && (
-                <div className="mt-3 space-y-3">
-                  {notices.slice(1).map(notice => (
-                    <div key={notice.id} className="bg-white border rounded-xl p-5 hover-lift">
-                      <div className="flex justify-between items-start mb-1">
-                        <h3 className="font-bold text-gray-900">{notice.title}</h3>
-                        {isStaff && (
-                          <button onClick={() => {
-                            if (confirm('이 공지사항을 삭제하시겠습니까?')) {
-                              setNotices(notices.filter(n => n.id !== notice.id));
-                              alert('공지사항이 삭제되었습니다!');
-                            }
-                          }} className="text-red-600 hover:text-red-700 text-sm font-medium px-3 py-1 hover:bg-red-50 rounded">
-                            삭제
-                          </button>
-                        )}
-                      </div>
-                      <p className="text-sm text-gray-700">{notice.content}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
             </div>
           )}
           <div className="bg-white border-y mt-6">
