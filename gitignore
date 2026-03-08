@@ -1,0 +1,26 @@
+# Environment Variables
+.env
+.env.local
+.env.production
+
+# API Keys
+*.key
+config.json
+
+# Build outputs
+dist/
+build/
+
+# Dependencies
+node_modules/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
